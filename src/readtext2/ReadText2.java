@@ -8,7 +8,7 @@ public class ReadText2 {
     public static void main(String[] args) throws IOException {
         
         Scanner input = new Scanner(System.in);
-        String filePath = "C:\\Users\\ProgS\\Desktop\\MyProfile.txt";
+        String filePath = "/*Here you write the text file path*/"; 
         readANDwrite rNw = new readANDwrite(filePath);
         int choice =0;
         
@@ -21,7 +21,6 @@ public class ReadText2 {
                         + "Choose a number: ");
         
         choice = input.nextInt();
-        
         
         switch(choice)
         {

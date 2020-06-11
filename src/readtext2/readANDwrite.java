@@ -13,7 +13,7 @@ public class readANDwrite {
     String line = ""; //Line of texts
     int count = 0; //Word counter
     int lineCount = 0; //Line counter
-    String filePath = "";
+    String filePath = ""; // Text file path
         
     //List of words
     String[] words;
