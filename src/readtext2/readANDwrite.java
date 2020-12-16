@@ -9,77 +9,43 @@ import java.util.Scanner;
 
 public class readANDwrite {
     //Initials
-    String word2search = ""; //Word to search for
     String line = ""; //Line of texts
     int count = 0; //Word counter
     int lineCount = 0; //Line counter
-    String filePath = ""; // Text file path
-        
-    //List of words
-    String[] words;
+    
+    intialsVar var = new intialsVar();
 
-    public readANDwrite(String filePath){
-        this.filePath=filePath;
+    public readANDwrite(){
     }
-
-    public String getWord2search() {
-        return word2search;
-    }
-
-    public void setWord2search(String word2search) {
-        this.word2search = word2search;
-    }
-
-    public String getLine() {
-        return line;
-    }
-
-    public void setLine(String line) {
-        this.line = line;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public int getLineCount() {
-        return lineCount;
-    }
-
-    public void setLineCount(int lineCount) {
-        this.lineCount = lineCount;
-    }
-
-    public String[] getWords() {
-        return words;
-    }
-
-    public void setWords(String[] words) {
-        this.words = words;
+    
+    public void readFile() throws FileNotFoundException, IOException{
+        FileReader txtFile = new FileReader(var.getFilePath());
+        BufferedReader inFile = new BufferedReader(txtFile);
+        while((line = inFile.readLine()) != null)
+        {
+            System.out.println(line);
+        }
+        inFile.close();
     }
 
     public void search4word() throws FileNotFoundException, IOException{
-        FileReader txtFile = new FileReader(this.filePath);
+        FileReader txtFile = new FileReader(var.getFilePath());
         BufferedReader inFile = new BufferedReader(txtFile);
         Scanner input = new Scanner(System.in);
         
         System.out.println("Enter a word to search for it:");
-        word2search = input.next(); 
+        var.setWord2search(input.next()); 
         
         System.out.format("\n--------------------------------\n");
         
         while((line = inFile.readLine()) != null)
         {
             lineCount++;
-            words=line.split(" "); //Splits words when space is found
+            var.setWords(line.split(" ")); //Splits words when space is found
             //Searching for the word in word2search
-            for (String word : words) 
+            for (String word : var.getWords()) 
             {
-              if (word.equals(word2search)) 
+              if (word.equals(var.getWord2search())) 
                    {
                      System.out.format("The word was found at line %d.\n",lineCount);
                      count++;
@@ -103,17 +69,17 @@ public class readANDwrite {
     }
     
     public void writeINfile () throws FileNotFoundException, IOException{
-        FileReader txtFile = new FileReader(this.filePath);
+        FileReader txtFile = new FileReader(var.getFilePath());
         BufferedReader inFile = new BufferedReader(txtFile);
         Scanner input = new Scanner(System.in);
-        FileWriter writer = new FileWriter(this.filePath, true);
+        FileWriter writer = new FileWriter(var.getFilePath(), true);
         
         System.out.println("");
         System.out.println("Write to add to file: ");
         String in = input.nextLine();
-        writer.write("\n");   // write new line
-        writer.write("\n");   // write new line
-        writer.write(in);
+        writer.append("\n");   // write new line
+        writer.append("\n");   // write new line
+        writer.append(in);
         writer.close();
         inFile.close();
         
